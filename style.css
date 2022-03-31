@@ -1,0 +1,175 @@
+:root {
+    --aside-width: 7em;
+}
+body {
+    margin-left: calc(var(--aside-width) + 6em);
+    margin-top: 1em;
+    background-color: #202124;
+    color: #ccc;
+    display: flex;
+    flex-direction: row;
+}
+body > main {
+    width: 100%;
+    max-width: 720px;
+    margin: 1em auto 0;
+}
+::selection {
+    background-color: #2c3e56;
+}
+
+/* aside */
+aside {
+    display: block;
+    position: fixed;
+    left: 0;
+    direction: rtl;
+    top: 0;
+    width: var(--aside-width);
+    height: 100vh;
+    padding: 1em 1em 1em 1.5em;
+    overflow: scroll;
+    color: #999;
+    x--font-size: 1.2em;
+    opacity: 0.3;
+    transition: 1s;
+}
+aside:hover {
+    opacity: 1;
+}
+aside > * {
+    direction: ltr;
+}
+aside ul {
+    margin: 0;
+    margin-bottom: 2em;
+    padding: 0;
+    list-style-type: none;
+}
+aside ul li {
+    counter-increment: index-no;
+    font-size: 1.2em;
+    padding-bottom: 0.2em;
+}
+aside ul li:before {
+    content: counter(index-no);
+    text-align: right;
+    width: 2em;
+    display: inline-block;
+    padding-right: 1em;
+    x--font-variant-numeric: tabular-nums lining-nums;
+    font-family: monospace;
+}
+aside ul li a {
+    color: #ccc;
+}
+aside ul li.active a {
+    color: #8ab5e5;
+}
+
+/* artivle */
+
+hr {
+    margin: 1em 0 4em;
+    border-color: #555;
+}
+
+article {
+    display: flex;
+    flex-direction: row;
+}
+article hr {
+    border: 1px solid #888;
+}
+article > div.title {
+    display: flex;
+    flex-direction: column;
+    x--justify-content: space-between;
+    text-align: center;
+}
+article.active > div.title {
+    position: sticky;
+    top: 3em;
+    align-self: flex-start;
+}
+article > div.title > h2 {
+    cursor: pointer;
+    margin: 0.2rem 0;
+    font-size: 2em;
+    font-weight: 100;
+    writing-mode: horizontal-tb;
+    text-align: left;
+}
+article.active > div.title > h2 {
+    writing-mode: vertical-lr;
+    line-height: 2em;
+    color: #ddd;
+}
+article.gua > div.title > h2::first-letter {
+    font-size: 3em;
+}
+article.gua.active > div.title > h2::first-letter {
+    font-size: 9em;
+}
+article.appendix.active > div.title > h2 {
+    font-size: 3em;
+    line-height: 1em;
+}
+
+article > div.title > span.copy {
+    margin-top: 2rem;
+    font-size: 0.3em;
+    cursor: pointer;
+    color: #777;
+    opacity: 0;
+    transition: opacity 1.5s;
+}
+article.active > div.title:hover > span.copy {
+    opacity: 0.7;
+    transition: opacity 2s;
+}
+
+article > div.title {
+    z-index: 2;
+}
+article > div.content {
+    z-index: 10;
+}
+
+article > div.content {
+    display: none;
+}
+
+article.active > div.content {
+    display: block;
+}
+article > div.content {
+    counter-reset: section;
+    x--margin-top: 0.5em;
+    margin-bottom: 2em;
+    font-size: 1.2em;
+    padding-left: 1em;
+}
+article > div.content > section {
+    display: flex;
+    flex-direction: row;
+}
+article > div.content > section:before  {
+    counter-increment: section;
+    content: counter(section);
+    user-select: none;
+    padding: 1em;
+    color: #aaa;
+    font-variant-numeric: tabular-nums lining-nums;
+    font-family: monospace;
+    text-align: right;
+    flex-basis: 2rem;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+article > div.content > section > div > p  {
+    margin: 0.5em;
+}
+article.appendix > div.title {
+    padding-left: 0.8rem;
+}

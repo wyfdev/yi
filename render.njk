@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>易</title>
+    <style>
+        {{ style | safe }}
+    </style>
+    <script>
+        "use strict";
+         const data = {{ json | safe }};
+    </script>
+    <script>
+        "use strict";
+        {{ script | safe }}
+    </script>
+</head>
+<body>
+    <aside>
+        <ul>
+        {% for i in appendix %}
+            <li><a href="#{{i.uri}}">{{i.content.title}}</a></li>
+        {% endfor %}
+        </ul>
+
+        <ul>
+        {% for i in gua %}
+            <li><a href="#{{i.uri}}">{{i.content.title}}</a></li>
+        {% endfor %}
+        </ul>
+    </aside>
+
+    <main>
+
+        {% for i in appendix %}
+        <article id="{{i.uri}}" class="appendix">
+            <div class="title">
+                <h2>{{i.content.title}}</h2>
+                <!-- <span>{{page.uri}}</span> -->
+                <span class="copy" data-article-id="{{i.uri}}">Copy</span>
+            </div>
+
+            <div class="content">
+                <!-- <hr> -->
+                {% for pargraphs in i.content.pargraphs %}
+                <section>
+                    <div>
+                        <!-- <div class="number">{{id}}</div> -->
+                        {% for p in pargraphs %}
+                        <p>{{p}}</p>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+
+        </article>
+        {% endfor %}
+
+        <hr />
+
+        {% for i in gua %}
+        <article id="{{i.uri}}" class="gua">
+            <div class="title">
+                <h2>{{i.content.title}}</h2>
+                <!-- <span>{{page.uri}}</span> -->
+                <span class="copy" data-article-id="{{i.uri}}">Copy</span>
+            </div>
+
+            <div class="content">
+                <!-- <hr> -->
+                {% for pargraphs in i.content.pargraphs %}
+                <section>
+                    <div>
+                        <!-- <div class="number">{{id}}</div> -->
+                        {% for p in pargraphs %}
+                        <p>{{p}}</p>
+                        {% endfor %}
+                    </div>
+                </section>
+                {% endfor %}
+            </div>
+
+        </article>
+        {% endfor %}
+    
+    </main>
+</body>
+</html>
