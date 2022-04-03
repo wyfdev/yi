@@ -30,7 +30,6 @@ aside {
     padding: 1em 1em 1em 1.5em;
     overflow: scroll;
     color: #999;
-    x--font-size: 1.2em;
     opacity: 0.3;
     transition: 1s;
 }
@@ -57,7 +56,6 @@ aside ul li:before {
     width: 2em;
     display: inline-block;
     padding-right: 1em;
-    x--font-variant-numeric: tabular-nums lining-nums;
     font-family: monospace;
 }
 aside ul li a {
@@ -78,13 +76,15 @@ article {
     display: flex;
     flex-direction: row;
 }
+article.active {
+    padding-top: 2em;;
+}
 article hr {
     border: 1px solid #888;
 }
 article > div.title {
     display: flex;
     flex-direction: column;
-    x--justify-content: space-between;
     text-align: center;
 }
 article.active > div.title {
@@ -145,6 +145,7 @@ article.active > div.content {
 }
 article > div.content {
     counter-reset: section;
+    width: 100%;
     x--margin-top: 0.5em;
     margin-bottom: 2em;
     font-size: 1.2em;
