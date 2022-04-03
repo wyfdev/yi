@@ -2,7 +2,7 @@
     --aside-width: 7em;
 }
 body {
-    margin-left: calc(var(--aside-width) + 6em);
+    margin-left: calc(var(--aside-width) + 8em);
     margin-top: 1em;
     background-color: #202124;
     color: #ccc;
