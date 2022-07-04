@@ -1,13 +1,15 @@
 :root {
     --aside-width: 7em;
+    --bg-color: #202124;
 }
 body {
     margin-left: calc(var(--aside-width) + 8em);
     margin-top: 1em;
-    background-color: #202124;
+    background-color: var(--bg-color);
     color: #ccc;
     display: flex;
     flex-direction: row;
+    overflow-x: hidden;
 }
 body > main {
     width: 100%;
@@ -22,6 +24,7 @@ body > main {
 aside {
     display: block;
     position: fixed;
+    flex-direction: column;
     left: 0;
     direction: rtl;
     top: 0;
@@ -173,4 +176,60 @@ article > div.content > section > div > p  {
 }
 article.appendix > div.title {
     padding-left: 0.8rem;
+}
+
+/**
+ * responsive
+ */
+@media screen and (max-width: 700px) {
+    body {
+        margin-left: 0;
+    }
+    /* aside */
+    body aside {
+        display: none;
+    }
+    body.aside-visable aside {
+        display: flex;;
+    }
+    body.aside-visable main {
+        transform: translateX(var(--aside-width));
+    }
+    body aside {
+        padding: 0.1em;
+    }
+
+    /* articles */
+    main > * {
+        background: var(--bg-color);
+    }
+    article {
+        flex-direction: column;
+    }
+    article > div.title {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        z-index: 12;
+    }
+    article.active > div.title {
+        position: sticky;
+        top: 0;
+        background: var(--bg-color);
+    }
+    article.active > div.title > h2 {
+        writing-mode: lr;
+        line-height: 3em;
+        margin-bottom: -0.5em;
+    }
+    article.gua.active > div.title > h2::first-letter {
+        font-size: 3em;
+    }
+    article > div.content {
+        padding-left: 0;;
+    }
+    article > div.content > section:before {
+        padding: 1em 0.1em;
+    }
+
 }

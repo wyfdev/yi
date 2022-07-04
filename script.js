@@ -31,6 +31,7 @@ const initIndexAside = () => {
     // show when click aside item
     let aside = document.querySelector('aside')
 
+    // click aside items
     aside.addEventListener('click', (e) => {
         if (e.target.tagName !== 'A') {
             throw '...';
@@ -41,6 +42,8 @@ const initIndexAside = () => {
         document.querySelectorAll('article.active').forEach(ele => { ele.classList.remove('active')})
         let targetId = e.target.getAttribute('href').replace('#', '');
         document.getElementById(targetId).classList.add('active')
+
+        document.body.classList.remove('aside-visable');
     })
 
     window.addEventListener('hashchange', (e) => {
@@ -66,6 +69,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
+// copy
 document.addEventListener('click', (e) => {
     const copy = (text) => {
         navigator.clipboard.writeText(text).then(() => {
@@ -88,3 +92,31 @@ document.addEventListener('click', (e) => {
         }
     }
 });
+
+// touch
+{
+    let touchstartX = 0
+    let touchendX = 0
+        
+    document.addEventListener('touchstart', e => {
+        touchstartX = e.changedTouches[0].screenX
+    })
+
+    document.addEventListener('touchend', e => {
+        touchendX = e.changedTouches[0].screenX
+
+        console.log(Math.abs(touchendX - touchstartX))
+
+        if (Math.abs(touchendX - touchstartX) < 100) {
+            return;
+        }
+        if (touchendX < touchstartX) {
+            console.log('swiped left')
+            document.body.classList.remove('aside-visable');
+        }
+        else {
+            console.log('swiped right')
+            document.body.classList.add('aside-visable');
+        }
+    })
+}
