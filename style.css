@@ -217,6 +217,7 @@ article.appendix > div.title {
         top: 0;
         background: var(--bg-color);
     }
+    article.appendix.active > div.title > h2,
     article.active > div.title > h2 {
         writing-mode: lr;
         line-height: 3em;
