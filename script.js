@@ -5,7 +5,7 @@
 /**
  *
  * genrate aside
- * 
+ *
  */
 const initIndexAside = () => {
     /*
@@ -51,6 +51,38 @@ const initIndexAside = () => {
     }, false);
 }
 
+
+// function: notification
+const notification = new class {
+    constructor() {
+        const noticeBar = document.createElement('div');
+        noticeBar.style = `
+            display: none; position: fixed; top: -100%; left: 50vw; z-index: 1000;
+            min-width: 10em; min-height: 1.2em; padding: .1em; border-radius: 0 0 4px 4px;
+            background: #4e5255; color: #ddd;
+            text-align: center; font-size: 0.8rem;
+            cursor: pointer; transition: top 1s;
+            transform: translate(-50%, 0);
+        `;
+        noticeBar.innerHTML = '--';
+
+        this.bar = noticeBar;
+        addEventListener("DOMContentLoaded", (event) => {
+            document.body.appendChild(noticeBar);
+        });
+    }
+
+    show(html, secs) {
+        this.bar.innerHTML = html;
+        this.bar.style.display = 'block';
+        this.bar.style.top = 0;
+        setTimeout(() => {
+            this.bar.style.top = '-100%';
+            setTimeout(() => this.bar.style.display = 'none', 500);
+        }, ((secs ? secs : 1) + 1) * 1000);
+    }
+}
+
 window.addEventListener('load', () => {
     initIndexAside();
 });
@@ -68,6 +100,15 @@ document.addEventListener('click', (e) => {
         article.scrollIntoView({behavior: "smooth", block: "start"});
     }
 });
+
+
+// locate artile by hash on load
+window.addEventListener("DOMContentLoaded", (event) => {
+    let article = document.querySelector(location.hash);
+    article.classList.add('active');
+    article.scrollIntoView({behavior: "smooth", block: "start"});
+});
+
 
 // copy
 document.addEventListener('click', (e) => {
@@ -90,14 +131,16 @@ document.addEventListener('click', (e) => {
                 }
             }
         }
+        notification.show('已複製');
     }
 });
+
 
 // touch
 {
     let touchstartX = 0
     let touchendX = 0
-        
+
     document.addEventListener('touchstart', e => {
         touchstartX = e.changedTouches[0].screenX
     })

@@ -18,7 +18,7 @@ const DB_NAME = 'db.json';
 
     await db.read();
     db.data ||= {pages: []};
-    
+
     console.log(nunjucks.render('./render.njk', {
         script: script,
         style: style,
