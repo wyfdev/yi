@@ -19,6 +19,8 @@
 </head>
 <body>
     <aside>
+        <input type="text" id="gua-search-input" placeholder="Enter 6-digit code">
+        <button id="gua-search-button">Search</button>
         <ul>
         {% for i in appendix %}
             <li><a href="#{{i.uri}}">{{i.content.title}}</a></li>

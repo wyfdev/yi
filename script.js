@@ -85,6 +85,25 @@ const notification = new class {
 
 window.addEventListener('load', () => {
     initIndexAside();
+
+    const searchInput = document.getElementById('gua-search-input');
+    const searchButton = document.getElementById('gua-search-button');
+
+    searchButton.addEventListener('click', () => {
+        const code = searchInput.value;
+        if (!/^[01]{6}$/.test(code)) {
+            notification.show("Invalid code. Please enter a 6-digit binary code.", 3);
+            return;
+        }
+
+        const foundGua = data.gua.find(item => item.binary === code);
+
+        if (foundGua) {
+            location.hash = foundGua.uri;
+        } else {
+            notification.show("Gua not found for this code.", 3);
+        }
+    });
 });
 
 // show when click <h2>
